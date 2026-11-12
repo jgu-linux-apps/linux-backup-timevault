@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Linux Backup TimeVault
+GenericName=Kopia zapasowa systemu
+Comment=Kopie całego systemu na dysk zewnętrzny i odtwarzanie jak w Time Machine
+TryExec=timevault-gui
+Exec=timevault-gui
+Icon=timevault
+Terminal=false
+Categories=System;Utility;Archiving;
+Keywords=backup;kopia;restore;time machine;
+StartupWMClass=timevault

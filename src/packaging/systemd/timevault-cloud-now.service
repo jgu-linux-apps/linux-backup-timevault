@@ -1,0 +1,8 @@
+[Unit]
+Description=TimeVault: backup to Google Drive now / kopia do Google Drive teraz
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/timevault cloud-backup --trigger manual
+Nice=10

@@ -1,0 +1,56 @@
+name: Release
+
+# Pushing a tag such as v1.2.3 builds the .deb from src/ and publishes it,
+# together with a source archive, as a GitHub Release.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends librsvg2-bin
+
+      - name: Check that the tag matches the app version
+        run: |
+          VERSION=$(python3 -c 'import timevault; print(timevault.__version__)')
+          if [ "${GITHUB_REF_NAME}" != "v${VERSION}" ]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match the app version (${VERSION})"; exit 1
+          fi
+          echo "VERSION=${VERSION}" >> "$GITHUB_ENV"
+
+      - name: Build the package
+        run: bash packaging/build-deb.sh
+
+      - name: Collect release files
+        run: |
+          mkdir -p ../release
+          DEB=$(ls dist/*_${VERSION}_*.deb)
+          dpkg-deb -f "$DEB" Package Version Architecture
+          [ "$(dpkg-deb -f "$DEB" Version)" = "${VERSION}" ] || { echo "Package version differs from the tag"; exit 1; }
+          cp "$DEB" ../release/
+          for z in dist/*.shell-extension.zip; do [ -f "$z" ] && cp "$z" ../release/ || true; done
+          git -C .. archive --format=tar.gz --prefix=linux-backup-timevault/ \
+            -o "release/linux-backup-timevault-${VERSION}-src.tar.gz" HEAD:src
+          ls -la ../release
+
+      - name: Publish the release
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" release/* \
+            --title "linux-backup-timevault ${VERSION}" \
+            --notes "Install: \`sudo apt install ./$(basename release/*.deb)\`. Changes: see the version history in README.md."

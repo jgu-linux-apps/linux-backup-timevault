@@ -1,0 +1,9 @@
+[Unit]
+Description=TimeVault: backup after the disk is connected / kopia po podłączeniu dysku
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 5
+ExecStart=/usr/bin/timevault auto-backup --trigger connect
+Nice=10
+IOSchedulingClass=best-effort

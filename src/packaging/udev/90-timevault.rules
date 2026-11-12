@@ -1,0 +1,6 @@
+# TimeVault: partycje dysku backupu nie pojawiają się w Plikach/na pulpicie
+# (obsługa przez aplikację), a podłączenie dysku uruchamia automatyczną kopię.
+SUBSYSTEM!="block", GOTO="timevault_end"
+ENV{ID_PART_ENTRY_NAME}=="TM-EFI|TM-RECOVERY-A|TM-RECOVERY-B|TM-DATA", ENV{UDISKS_IGNORE}="1"
+ACTION=="add", ENV{ID_PART_ENTRY_NAME}=="TM-DATA", TAG+="systemd", ENV{SYSTEMD_WANTS}+="timevault-backup-connect.service"
+LABEL="timevault_end"

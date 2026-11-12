@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Linux Backup TimeVault
+Comment=Linux Backup TimeVault w zasobniku
+Exec=timevault-gui --tray
+Icon=timevault
+Terminal=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=5

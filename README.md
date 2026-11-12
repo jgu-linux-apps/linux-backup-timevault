@@ -7,7 +7,7 @@ to an external disk (optionally Google Drive), keeps an hourly/daily/weekly hist
 restore the system 1:1 onto the same disk or a brand-new one by booting a Recovery system
 that lives on the backup disk itself.
 
-> Current version: **0.7.3** — see the [Changelog](#changelog) below.
+> Current version: **0.7.4** — see the [Changelog](#changelog) below.
 > Polish documentation: [README.pl.md](README.pl.md).
 > The user interface is available in **English and Polish** (follows the system language).
 
@@ -64,8 +64,10 @@ NVIDIA setup to the new hardware.
 
 ## Installation
 
+Download the newest `timevault_<version>_all.deb` from the [Releases page](https://github.com/jgu-linux-apps/linux-backup-timevault/releases/latest) and install it:
+
 ```bash
-sudo apt install ./timevault_0.7.3_all.deb
+sudo apt install ./timevault_<version>_all.deb
 ```
 
 The package installs:
@@ -179,7 +181,21 @@ sudo timevault config --interval 4h --on-connect on   # 1h | 4h | 24h | 7d, --au
 timevault --lang en …                        # message language: pl | en | auto
 ```
 
+## Repository layout and building
+
+The source code is in `src/`; the `.deb` packages are not kept in git but attached to
+[GitHub Releases](https://github.com/jgu-linux-apps/linux-backup-timevault/releases).
+Pushing a tag `vX.Y.Z` that matches `__version__` in `src/timevault/__init__.py` makes GitHub
+Actions (`.github/workflows/release.yml`) build the package and publish the release.
+
+```bash
+cd src
+bash packaging/build-deb.sh        # -> dist/timevault_<version>_all.deb
+```
+
 ## Testing
+
+Run inside `src/`:
 
 ```bash
 sudo python3 -m pytest tests/      # creates loop devices under /tmp/timevault-test
@@ -221,6 +237,13 @@ backups created by older versions keep working.
 ## Changelog
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+### [0.7.4] — 2026-11-12
+
+#### Changed
+- No changes in the app. The repository now keeps the source code in `src/`, and the `.deb`
+  is published on the GitHub Releases page (built by GitHub Actions for every version tag).
+  README: installation from Releases, repository layout.
 
 ### [0.7.3] — 2026-11-06
 

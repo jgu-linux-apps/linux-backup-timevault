@@ -1,0 +1,10 @@
+[Unit]
+Description=TimeVault: backup to Google Drive / kopia do Google Drive
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/timevault cloud-backup --trigger timer
+Nice=15
+IOSchedulingClass=idle

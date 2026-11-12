@@ -1,0 +1,8 @@
+[Unit]
+Description=TimeVault: kopia zapasowa na żądanie
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/timevault auto-backup --manual
+Nice=5
+IOSchedulingClass=best-effort

@@ -1,0 +1,19 @@
+# Built packages and archives (published in GitHub Releases, not in git)
+*.deb
+*.tar.gz
+*.zip
+*.AppImage
+dist/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Editors and system files
+.vscode/
+.idea/
+*.swp
+.DS_Store

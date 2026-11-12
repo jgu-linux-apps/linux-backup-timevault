@@ -1,0 +1,8 @@
+[Unit]
+Description=TimeVault: przeglądanie kopii (tylko odczyt)
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/timevault browse
+KillSignal=SIGINT
+TimeoutStopSec=30

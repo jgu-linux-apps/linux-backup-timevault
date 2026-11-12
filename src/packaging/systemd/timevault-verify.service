@@ -1,0 +1,8 @@
+[Unit]
+Description=TimeVault: weryfikacja kopii
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/timevault verify
+Nice=10
+IOSchedulingClass=idle

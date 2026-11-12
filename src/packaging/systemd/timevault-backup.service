@@ -1,0 +1,8 @@
+[Unit]
+Description=TimeVault: scheduled backup / kopia według harmonogramu
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/timevault auto-backup --trigger timer
+Nice=10
+IOSchedulingClass=idle
