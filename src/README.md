@@ -7,7 +7,7 @@ to an external disk (optionally Google Drive), keeps an hourly/daily/weekly hist
 restore the system 1:1 onto the same disk or a brand-new one by booting a Recovery system
 that lives on the backup disk itself.
 
-> Current version: **0.7.4** — see the [Changelog](#changelog) below.
+> Current version: **0.7.5** — see the [Changelog](#changelog) below.
 > Polish documentation: [README.pl.md](README.pl.md).
 > The user interface is available in **English and Polish** (follows the system language).
 
@@ -18,7 +18,7 @@ that lives on the backup disk itself.
 | Dual boot | Yes — Windows partitions are never touched |
 | Backup engine | [restic](https://restic.net) — deduplicated, compressed, encrypted |
 | Off-site copy | Optional second copy on Google Drive (via rclone), restorable from Recovery |
-| License | Private project |
+| License | Freeware, no modifications (see `LICENSE`) |
 
 ## How it works
 
@@ -237,6 +237,13 @@ backups created by older versions keep working.
 ## Changelog
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+### [0.7.5] — 2026-11-12
+
+#### Changed
+- License: the app is now published under the Freeware License (No Modifications),
+  see `LICENSE`; free to use and share unmodified, modification is not permitted.
+  No other changes in the app.
 
 ### [0.7.4] — 2026-11-12
 

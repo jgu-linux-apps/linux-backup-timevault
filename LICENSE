@@ -1,0 +1,76 @@
+TimeVault (linux-backup-timevault) - Freeware License (No Modifications), version 1.0
+
+Copyright (c) 2026 JGu ("the Author")
+
+1. Definitions
+
+"Software" means TimeVault (linux-backup-timevault): its source code,
+documentation, icons, translations and the packages built from them (for
+example the .deb file), as published by the Author under this license.
+"You" means any person who uses or redistributes the Software.
+
+2. Permission
+
+The Author grants You a worldwide, non-exclusive, royalty-free license to:
+
+  a) install and use the Software for private or commercial purposes on any
+     number of devices;
+  b) copy and redistribute the Software in its original, unmodified form,
+     provided that You include this license and all copyright notices and do
+     not charge a fee for the Software itself;
+  c) read the source code and study how the Software works.
+
+3. Restrictions
+
+Except where mandatory law gives You the right, You may NOT:
+
+  a) modify, adapt, translate, or create derivative works from the Software or
+     any part of it. This includes changing, adding or removing code, texts,
+     translations, icons or other files in the Software or in its packages;
+  b) sell, rent, lease or sublicense the Software, or include it in a product
+     or package that is sold;
+  c) remove or alter any license text, copyright notice or notice from this
+     license;
+  d) present a modified copy as the Software, or present the Software as Your
+     own work.
+
+Using the settings that the Software itself offers is use, not modification.
+
+4. Third-party components
+
+The Software uses, and its packages may include, third-party components such
+as Python, PyQt6 / Qt 6, rclone, restic, OpenSSL and the system tools it
+calls. They are NOT covered by this license. Each of them stays under its own
+license, which gives You the rights stated there. Nothing in this license
+limits those rights.
+
+5. No affiliation
+
+The Software is unofficial. It is not affiliated with, endorsed by or
+sponsored by Apple Inc. or Google LLC. Time Machine is a trademark of Apple
+Inc. Google Drive is a trademark of Google LLC.
+
+6. No warranty, limitation of liability
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR ITS USE, INCLUDING ANY LOSS OF DATA.
+
+7. Termination
+
+This license ends automatically if You breach it. You must then stop using and
+distributing the Software and delete Your copies.
+
+8. Earlier versions
+
+Earlier versions of the Software were published without a separate license
+file. This license also applies to them.
+
+9. General
+
+Mandatory law, including consumer protection law, is not affected by this
+license. If a provision of this license is invalid, the rest remains in
+force.

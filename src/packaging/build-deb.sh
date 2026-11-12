@@ -19,6 +19,7 @@ cp packaging/desktop/timevault.desktop $B/usr/share/applications/
 cp packaging/desktop/timevault-autostart.desktop $B/etc/xdg/autostart/timevault.desktop
 cp timevault/icons/timevault.svg $B/usr/share/icons/hicolor/scalable/apps/timevault.svg
 cp README.md README.pl.md $B/usr/share/doc/timevault/
+cp LICENSE $B/usr/share/doc/timevault/copyright
 SIZE=$(du -sk $B | cut -f1)
 cat > $B/DEBIAN/control <<CTL
 Package: timevault
