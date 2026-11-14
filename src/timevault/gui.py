@@ -24,7 +24,7 @@ from PyQt6.QtWidgets import (QApplication, QButtonGroup, QCheckBox, QComboBox, Q
                              QProgressBar, QPushButton, QRadioButton, QSystemTrayIcon, QTabWidget,
                              QToolButton, QVBoxLayout, QWidget)
 
-from . import APP_NAME, __version__, aurora_qt, i18n
+from . import APP_NAME, __version__, aurora_qt, aurora_titlebar, i18n
 from .i18n import L
 from .userdisks import (_children, candidate_disks, disk_name, human,  # noqa: F401
                         is_timevault_disk, lsblk, timevault_disk, timevault_disk_connected)
@@ -850,6 +850,9 @@ class MainWindow(QWidget):
         self.more.setMenu(more)
         bottom.addWidget(self.more)
         lay.addLayout(bottom)
+        # Aurora: own title bar in the theme colours (Qt's own decoration cannot be styled)
+        self.tbar = aurora_titlebar.TitleBar(self, APP_NAME)
+        self.tbar.set_active(aurora_qt.saved() == "aurora", is_dark())
 
     # -- baner pierwszego uruchomienia -------------------------------------------
     def _banner_action(self):
@@ -989,6 +992,7 @@ class MainWindow(QWidget):
 
     def apply_theme(self):
         self._banner_qss()
+        self.tbar.set_active(aurora_qt.saved() == "aurora", is_dark())
         self.setWindowIcon(app_icon())
         self.logo.setPixmap(app_icon().pixmap(56, 56))
 

@@ -4,7 +4,7 @@ TimeVault — Time Machine dla Ubuntu (24.04 LTS i nowsze): pełny backup system
 (opcjonalnie Google Drive) i odtworzenie 1:1 — aplikacje, ustawienia, tapeta, użytkownik,
 snapy — na ten sam albo zupełnie nowy dysk.
 
-> **Status: 0.7.6 — aplikacja (tray) + automatyczne kopie + Recovery + paczka .deb.** (wcześniej: linux-backup-timemachine; dyski i backupy z 0.1.x działają bez zmian) Backup, retencja, weryfikacja i restore działają.
+> **Status: 0.7.7 — aplikacja (tray) + automatyczne kopie + Recovery + paczka .deb.** (wcześniej: linux-backup-timemachine; dyski i backupy z 0.1.x działają bez zmian) Backup, retencja, weryfikacja i restore działają.
 > Przetestowane end-to-end na wirtualnych dyskach oraz pełnym cyklem: minimalne Ubuntu 24.04
 > → backup → restore (z initramfs i update-grub w chroocie) → start w QEMU/UEFI do ekranu
 > logowania. Recovery przetestowane w QEMU: start z dysku backupu → restore na pusty dysk (z grub-install)
@@ -178,6 +178,7 @@ sudo python3 -m pytest tests/      # tworzy dyski loop w /tmp/timevault-test
 
 | Wersja | Co nowego |
 |---|---|
+| **0.7.7** | W motywie **Aurora** belka okna też jest w kolorach motywu (była biała): własna belka z tytułem i okrągłymi przyciskami, przeciąganie przesuwa okno, dwuklik maksymalizuje, krawędzie zmieniają rozmiar. **Systemowy** zostawia zwykłą belkę. |
 | **0.7.6** | Motyw **Aurora** (Więcej → Motyw), wspólny wygląd serii JGu Linux Apps: lawenda / granat, gradient fiolet → cyjan; jasny i ciemny według systemu. **Systemowy** zostawia zwykły wygląd Qt. |
 | **0.7.5** | Licencja Freeware License (No Modifications), zob. `LICENSE`: darmowe użytkowanie, bez prawa do modyfikacji; poza tym bez zmian w aplikacji |
 | **0.7.4** | Bez zmian w aplikacji: kod w repozytorium w katalogu `src/`, paczka `.deb` na stronie GitHub Releases (budowana automatycznie dla każdego tagu wersji) |

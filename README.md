@@ -7,7 +7,7 @@ to an external disk (optionally Google Drive), keeps an hourly/daily/weekly hist
 restore the system 1:1 onto the same disk or a brand-new one by booting a Recovery system
 that lives on the backup disk itself.
 
-> Current version: **0.7.6** — see the [Changelog](#changelog) below.
+> Current version: **0.7.7** — see the [Changelog](#changelog) below.
 > Polish documentation: [README.pl.md](README.pl.md).
 > The user interface is available in **English and Polish** (follows the system language).
 
@@ -237,6 +237,13 @@ backups created by older versions keep working.
 ## Changelog
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+### [0.7.7] — 2026-11-14
+
+#### Changed
+- **Aurora** now also colours the window title bar (it stayed white): the window gets its own bar with the
+  title and round minimise / maximise / close buttons, in GNOME's button order. Drag it to move the window,
+  double-click to maximise, drag the window edges to resize. **System** keeps the normal title bar.
 
 ### [0.7.6] — 2026-11-14
 
