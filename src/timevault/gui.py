@@ -24,7 +24,7 @@ from PyQt6.QtWidgets import (QApplication, QButtonGroup, QCheckBox, QComboBox, Q
                              QProgressBar, QPushButton, QRadioButton, QSystemTrayIcon, QTabWidget,
                              QToolButton, QVBoxLayout, QWidget)
 
-from . import APP_NAME, __version__, i18n
+from . import APP_NAME, __version__, aurora_qt, i18n
 from .i18n import L
 from .userdisks import (_children, candidate_disks, disk_name, human,  # noqa: F401
                         is_timevault_disk, lsblk, timevault_disk, timevault_disk_connected)
@@ -695,6 +695,7 @@ class MainWindow(QWidget):
         super().__init__()
         self.app = app
         self._loading = False
+        self.setObjectName("tvMain")
         self.setWindowTitle(APP_NAME)
         self.setWindowIcon(app_icon())
         self.resize(580, 680)
@@ -714,8 +715,7 @@ class MainWindow(QWidget):
         # Pierwsze uruchomienie: jedna jasna akcja zależna od podłączonego dysku.
         self.banner = QFrame()
         self.banner.setObjectName("banner")
-        self.banner.setStyleSheet("#banner{border:1px solid #2563eb;border-radius:8px;"
-                                  "background:rgba(37,99,235,0.08)}")
+        self._banner_qss()
         bl = QVBoxLayout(self.banner)
         self.banner_text = QLabel()
         self.banner_text.setWordWrap(True)
@@ -729,6 +729,7 @@ class MainWindow(QWidget):
         self.banner_disk = None
 
         card = QFrame()
+        card.setObjectName("tvCard")
         card.setFrameShape(QFrame.Shape.StyledPanel)
         cl = QVBoxLayout(card)
         self.last = QLabel()
@@ -768,6 +769,7 @@ class MainWindow(QWidget):
                                      "Zapisywane są tylko zmiany od poprzedniej kopii.",
                                      "Makes a backup right away, regardless of the schedule. "
                                      "Only changes since the previous backup are stored."))
+        self.btn_backup.setObjectName("tvPrimary")
         self.btn_backup.clicked.connect(app.backup_now)
         self.btn_browse = QPushButton(L("Przeglądaj kopie", "Browse backups"))
         self.btn_browse.clicked.connect(app.toggle_browse)
@@ -832,6 +834,15 @@ class MainWindow(QWidget):
                                   "Erases a chosen USB disk and turns it into an additional TimeVault disk."))
         self.act_new.triggered.connect(lambda: app.setup_new_disk())
         more.addSeparator()
+        looks = more.addMenu(L("Motyw", "Theme"))
+        grp = QActionGroup(self)
+        for key, text in (("system", L("Systemowy (jasny / ciemny)", "System (light / dark)")),
+                          ("aurora", L("Aurora (jasny / ciemny)", "Aurora (light / dark)"))):
+            a = looks.addAction(text)
+            a.setCheckable(True)
+            a.setChecked(aurora_qt.saved() == key)
+            grp.addAction(a)
+            a.triggered.connect(lambda _=False, key=key: app.set_theme(key))
         act_about = more.addAction(L("O programie", "About"))
         act_about.setToolTip(L("Wersja, silnik kopii i informacje o programie.",
                                "Version, backup engine and information about the app."))
@@ -971,7 +982,13 @@ class MainWindow(QWidget):
             self.history.addItem(L("Brak kopii", "No backups yet") if configured
                                  else L("Kopie pojawią się tutaj.", "Backups will appear here."))
 
+    def _banner_qss(self):
+        # w Aurorze baner rysuje arkusz aplikacji; w motywie systemowym zostaje niebieska ramka
+        self.banner.setStyleSheet("" if aurora_qt.saved() == "aurora" else
+                                  "#banner{border:1px solid #2563eb;border-radius:8px;background:rgba(37,99,235,0.08)}")
+
     def apply_theme(self):
+        self._banner_qss()
         self.setWindowIcon(app_icon())
         self.logo.setPixmap(app_icon().pixmap(56, 56))
 
@@ -1080,8 +1097,13 @@ class TimeVaultApp:
         SettingsDialog(self).exec()
         self.refresh()
 
+    def set_theme(self, name):
+        aurora_qt.save(name)
+        self.theme_changed()
+
     def theme_changed(self):
         """Motyw jasny/ciemny: ikona okna, docku, menu aplikacji i traya."""
+        aurora_qt.apply(self.qapp, aurora_qt.saved(), is_dark())
         self.qapp.setWindowIcon(app_icon())
         self.window.apply_theme()
         sync_launcher_icon()
@@ -1291,6 +1313,7 @@ def main():
     QLocalServer.removeServer(APP_ID)
     server = QLocalServer()
     server.listen(APP_ID)
+    aurora_qt.apply(qapp, aurora_qt.saved(), is_dark())
     app = TimeVaultApp(qapp, start_hidden)
     server.newConnection.connect(lambda: (server.nextPendingConnection(), app.show_window()))
     return qapp.exec()

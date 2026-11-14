@@ -7,7 +7,7 @@ to an external disk (optionally Google Drive), keeps an hourly/daily/weekly hist
 restore the system 1:1 onto the same disk or a brand-new one by booting a Recovery system
 that lives on the backup disk itself.
 
-> Current version: **0.7.5** — see the [Changelog](#changelog) below.
+> Current version: **0.7.6** — see the [Changelog](#changelog) below.
 > Polish documentation: [README.pl.md](README.pl.md).
 > The user interface is available in **English and Polish** (follows the system language).
 
@@ -237,6 +237,12 @@ backups created by older versions keep working.
 ## Changelog
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+### [0.7.6] — 2026-11-14
+
+#### Added
+- **Aurora** theme (More → Theme), the shared look of the JGu Linux Apps series: lavender / deep navy,
+  violet-to-cyan gradients. Light and dark follow the system. **System** keeps the standard Qt look.
 
 ### [0.7.5] — 2026-11-12
 
